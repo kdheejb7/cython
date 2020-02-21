@@ -23,6 +23,6 @@ arr3 = arr3.astype(np.float32)
 arr3_p = arr3.ctypes.data_as(c_float_p)
 
 
-mylib.arr_add_func(size, arr1_p, arr2_p, arr3_p)
+mylib.mat_mul_func(size, arr1_p, arr2_p, arr3_p)
 
 print (arr3)
