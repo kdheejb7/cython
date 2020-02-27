@@ -13,17 +13,18 @@ void mat_mul_func(int size, float *arr1, float *arr2, float *arr3) {
 	
     float *d_a, *d_b, *d_c; // device copies of a, b, c
     // Allocate space for device copies of a, b, c
-    cudaMalloc((void **)&d_a, sizeof(float)*size);
-    cudaMalloc((void **)&d_b, sizeof(float)*size);
-    cudaMalloc((void **)&d_c, sizeof(float)*size);
+    int _size = sizeof(float)*size;
+    cudaMalloc((void **)&d_a, _size);
+    cudaMalloc((void **)&d_b, _size);
+    cudaMalloc((void **)&d_c, _size);
 	
     // Copy a & b from the host to the device
-    cudaMemcpy(d_a, &a, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_b, &b, size, cudaMemcpyHostToDevice);
-	cudaMemcpy(d_c, &c, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_a, &a, _size, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_b, &b, _size, cudaMemcpyHostToDevice);
+	cudaMemcpy(d_c, &c, _size, cudaMemcpyHostToDevice);
 	
     // Launch add() kernel on GPU
-    add<<<N,1>>>(c, a, b);
+    add<<<N,1>>>(arr3, arr1, arr2);
 	
     // Copy result back to the host
     cudaMemcpy(&c, d_c, size, cudaMemcpyDeviceToHost);

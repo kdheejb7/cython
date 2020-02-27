@@ -1,33 +1,4 @@
 #include <stdio.h>
-/*
-#define N (1024*1024)
-#define M (1000000)
-
-__global__ void cudakernel(int *buf)
-{
-   int i = threadIdx.x + blockIdx.x * blockDim.x;
-   buf[i] = i;
-   for(int j = 0; j < M; j++)
-      buf[i] = buf[i] * buf[i] + 1;
-}
-
-int main()
-{
-   int data[N]; 
-   int count = 0;
-   int *d_data;
-   cudaMalloc(&d_data, N * sizeof(int));
-   cudakernel<<<N/256, 256>>>(d_data);
-   cudaMemcpy(data, d_data, N * sizeof(int), cudaMemcpyDeviceToHost);
-   cudaFree(d_data); 
-
-   int sel;
-   printf("Enter an index: ");
-   scanf("%d", &sel);
-   printf("data[%d] = %d\n", sel, data[sel]);
-}
-*/
-
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 #include <cublas.h>
